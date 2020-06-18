@@ -1,0 +1,71 @@
+body {
+  margin: 0;
+}
+
+// Device sizes
+$mobile: 479px;
+$tablet: 767px;
+$desktop: 991px;
+
+.row {
+  display: flex;
+  align-items: center;
+}
+.center {
+  justify-content: center;
+}
+
+.pull-left {
+  margin-right: auto;
+}
+.pull-right {
+  margin-left: auto;
+}
+
+.flex1 {
+  flex: 1;
+}
+
+// Truncate text
+.truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.center {
+  text-align: center;
+}
+
+// Mixin for padding and margin
+$offset: 5;
+$unit: "px";
+@mixin spacing-loop($className, $styleName) {
+  @for $i from 0 through 12 {
+    #{$className + $i} {
+      #{$styleName}: #{($i * $offset) + $unit};
+    }
+  }
+}
+
+// Margins
+@include spacing-loop(".mt-", "margin-top");
+@include spacing-loop(".mr-", "margin-right");
+@include spacing-loop(".mb-", "margin-bottom");
+@include spacing-loop(".ml-", "margin-left");
+@include spacing-loop(".m-", "margin");
+@include spacing-loop(".mh-", "margin-left");
+@include spacing-loop(".mh-", "margin-right");
+@include spacing-loop(".mv-", "margin-top");
+@include spacing-loop(".mv-", "margin-bottom");
+
+// Paddings
+@include spacing-loop(".pt-", "padding-top");
+@include spacing-loop(".pr-", "padding-right");
+@include spacing-loop(".pb-", "padding-bottom");
+@include spacing-loop(".pl-", "padding-left");
+@include spacing-loop(".p-", "padding");
+@include spacing-loop(".ph-", "padding-left");
+@include spacing-loop(".ph-", "padding-right");
+@include spacing-loop(".pv-", "padding-top");
+@include spacing-loop(".pv-", "padding-bottom");

@@ -1,0 +1,32 @@
+.hamburger {
+  line-height: 8px;
+  font-size: 30px;
+}
+
+.overlay {
+  background: black;
+  position: absolute;
+  opacity: 0.3;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+}
+
+.mobileNav {
+  position: absolute;
+  height: 100vh;
+  z-index: 20;
+  width: 250px;
+  // transition: width 0.5s ease;
+  // transform: translateX(280px);
+}
+
+// .isOpen {
+//   transform: none;
+// }
+
+.closeButton {
+  position: absolute;
+  top: 0;
+  right: 20px;
+}

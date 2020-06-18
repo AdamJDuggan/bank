@@ -1,0 +1,53 @@
+@import "./spacing.scss";
+
+.card {
+  border-radius: 6px;
+  box-shadow: 0 0 3px #ccc;
+  padding: 10px;
+}
+
+.tile {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+@media (min-width: $mobile) {
+  .tile {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+.tileElement {
+  border: 1px solid black;
+  padding: 10px;
+  background: white;
+}
+
+.grid {
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: $tablet) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: $desktop) {
+  .grid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.input {
+  border-radius: 6px;
+  padding: 10px;
+  box-shadow: 0 0 3px #ccc;
+  border: 1px solid rgb(224, 220, 220);
+  height: 20px;
+  outline: none;
+}

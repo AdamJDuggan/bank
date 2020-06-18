@@ -1,0 +1,29 @@
+$primary: #007a83;
+$secondary: #c6ebe9;
+$tertiary: rgb(219, 63, 89);
+
+.primary {
+  background: $primary;
+}
+
+.secondary {
+  background: $secondary;
+}
+.tertiary {
+  background: $tertiary;
+}
+
+.textPrimary {
+  color: $primary;
+}
+.textSecondary {
+  color: $secondary;
+}
+
+.textWhite {
+  color: white;
+}
+
+.white {
+  background: white;
+}
