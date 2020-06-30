@@ -1,3 +1,7 @@
+.desktopNav {
+  border-bottom: 2px solid white;
+}
+
 .hamburger {
   line-height: 8px;
   font-size: 30px;
@@ -21,12 +25,24 @@
   // transform: translateX(280px);
 }
 
-// .isOpen {
-//   transform: none;
-// }
+.isOpen {
+  transform: none;
+}
 
 .closeButton {
   position: absolute;
   top: 0;
   right: 20px;
+}
+
+.mobileMenuItems {
+  display: flex;
+  flex-direction: column;
+}
+
+.menuItem {
+  text-decoration: none !important;
+  font-size: 22px !important;
+  color: white;
+  cursor: pointer;
 }

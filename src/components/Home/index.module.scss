@@ -1,0 +1,15 @@
+section {
+  max-height: auto;
+  overflow: scroll;
+}
+
+@media (min-width: 769px) {
+  section {
+    max-height: 600px;
+  }
+}
+
+section:hover {
+  cursor: pointer;
+  opacity: 0.7;
+}

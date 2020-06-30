@@ -1,16 +1,19 @@
 $primary: #007a83;
 $secondary: #c6ebe9;
 $tertiary: rgb(219, 63, 89);
+$quaternary: #3298dc;
 
 .primary {
   background: $primary;
 }
-
 .secondary {
   background: $secondary;
 }
 .tertiary {
   background: $tertiary;
+}
+.quaternary {
+  background: $quaternary;
 }
 
 .textPrimary {
@@ -18,6 +21,12 @@ $tertiary: rgb(219, 63, 89);
 }
 .textSecondary {
   color: $secondary;
+}
+.textTertiary {
+  color: $tertiary;
+}
+.textQuaternary {
+  color: $quaternary;
 }
 
 .textWhite {

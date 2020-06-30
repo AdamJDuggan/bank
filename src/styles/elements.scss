@@ -27,6 +27,10 @@
   grid-template-columns: 1fr;
 }
 
+.gapless {
+  grid-gap: 0;
+}
+
 @media (min-width: $tablet) {
   .grid {
     grid-template-columns: 1fr 1fr;
