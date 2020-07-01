@@ -14,8 +14,8 @@ import { Abacus } from "./components/Abacus";
 import routes from "./routes/routes";
 
 //Redux
-import Store from "./store";
 import { Provider } from "react-redux";
+import store from "./store/store";
 
 // Hooks
 import { testContext } from "../src/hooks/useContext";
@@ -34,7 +34,7 @@ function App() {
   ]);
 
   return (
-    <Provider store={Store}>
+    <Provider store={store}>
       <BrowserRouter>
         <Nav />
         <testContext.Provider value={provider}>

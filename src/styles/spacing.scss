@@ -25,6 +25,11 @@ $desktop: 1300px;
 .flex1 {
   flex: 1;
 }
+.flex-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
 // Truncate text
 .truncate {
