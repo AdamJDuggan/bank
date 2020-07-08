@@ -21,6 +21,7 @@ import store from "./store/store";
 import { testContext } from "../src/hooks/useContext";
 
 function App() {
+  //This is jsut for the hooks tutorial not Abacus Express
   const [message, setMessage] = useState(
     "Hello from Context, declared in App.js"
   );

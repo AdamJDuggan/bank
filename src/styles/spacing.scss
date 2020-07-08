@@ -31,6 +31,10 @@ $desktop: 1300px;
   align-items: center;
 }
 
+.alignStart {
+  text-align: left;
+}
+
 // Truncate text
 .truncate {
   white-space: nowrap;

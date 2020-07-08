@@ -6,6 +6,7 @@ import { Sport } from "../Sport";
 import { Elements } from "../Elements";
 import { Hooks } from "../Hooks";
 import { Abacus } from "../Abacus";
+import { EloquentJavascript } from "../EloquentJavascript";
 
 // Routes
 import routes from "../../routes/routes";
@@ -31,6 +32,11 @@ function Home(props) {
         <Link className="noDecoration" to={routes.HOOKS}>
           <section>
             <Hooks />
+          </section>
+        </Link>
+        <Link className="noDecoration" to={routes.ELEMENTS}>
+          <section>
+            <EloquentJavascript />
           </section>
         </Link>
         <Link className="noDecoration" to={routes.ELEMENTS}>

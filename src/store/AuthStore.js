@@ -1,27 +1,45 @@
-import { createAction, createReducer } from "@reduxjs/toolkit";
-import firebase from "../firebase/firebase";
+import {
+  createAsyncThunk,
+  createReducer,
+  createAction,
+} from "@reduxjs/toolkit";
+import firebase from "../firebase";
 
-const INITIAL_STATE = {
-  id: 1,
-  isLoggedIn: true,
-  name: "Test name",
-};
+const INITIAL_STATE = { id: null, isLoggedIn: false };
 
-const login = (values) => {
-  firebase
-    .login(values.email, values.password)
-    .then((res) => console.log("login", res))
-    .catch((err) => console.log("ERR", err));
-};
-
-const reducer = createReducer(INITIAL_STATE, {
-  //   [login]: (state, action) => ({
-  //     id: action.payload.id || null,
-  //     isLoggedIn: !!action.payload.id,
-  //     name: action.payload.name,
-  //   }),
-  //   reset: (state, action) => INITIAL_STATE,
-  //   [logout.fulfilled]: (state, action) => INITIAL_STATE,
+const login = createAsyncThunk("auth/login", (values) => {
+  return firebase
+    .auth()
+    .signInWithEmailAndPassword(values.email, values.password)
+    .catch((err) => err);
 });
 
-export default { login, reducer };
+const register = createAsyncThunk("auth/register", (values) => {
+  return firebase
+    .auth()
+    .createUserWithEmailAndPassword(values.email, values.password);
+});
+
+const watch = createAsyncThunk("auth/watch", (payload, thunkApi) => {
+  return new Promise((resolve, reject) => {
+    firebase.auth().onAuthStateChanged((user) => {
+      thunkApi.dispatch(watch.success(user));
+      resolve(user);
+    }, reject);
+  });
+});
+watch.success = createAction("auth/watch/success");
+
+const logout = createAsyncThunk("auth/logout", () => {
+  return firebase.auth().signOut();
+});
+
+const reducer = createReducer(INITIAL_STATE, {
+  [watch.success]: (state, action) => ({
+    ...state,
+    id: action.payload ? action.payload.uid : null,
+    isLoggedIn: !!action.payload,
+  }),
+});
+
+export default { reducer, login, register, logout, watch };

@@ -12,9 +12,11 @@ function Button(props) {
   return (
     <button
       onClick={props.onClick}
+      type={props.type ? props.type : "button"}
+      disabled={props.disabled}
       className={classnames(
         styles.button,
-        props.styles,
+        props.className,
         hasPadding && styles.padding,
         props.primary && styles.primary,
         props.secondary && styles.secondary,

@@ -25,6 +25,9 @@ $quaternary: #3298dc;
 .textTertiary {
   color: $tertiary;
 }
+.borderTertiary {
+  border: 1px solid $tertiary;
+}
 .textQuaternary {
   color: $quaternary;
 }

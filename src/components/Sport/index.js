@@ -10,8 +10,8 @@ import styles from "./index.module.scss";
 // Components
 import { Button } from "../Button";
 
-//Keys
-import fetch from "../../fetch";
+// Utils
+import fetch from "../../utils/fetch";
 
 /** Component describtion */
 function Sport(props) {
