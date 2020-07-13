@@ -6,8 +6,7 @@ import AuthStore from "../../store/AuthStore";
 import { useDispatch } from "react-redux";
 
 //Hooks
-import useFormValidation from "../../hooks/useFormValidation";
-import validateLogin from "./validateLogin";
+import useFormValidation2 from "../../hooks/useFormValidation2";
 
 //3rd Party
 import classnames from "classnames";
@@ -27,7 +26,19 @@ function Login(props) {
   //Toggle whether to show login or register functionality
   const [login, toggleLogin] = React.useState(true);
   //Set initial state for this form
-  const INITIAL_STATE = { name: "", email: "", password: "" };
+  //const INITIAL_STATE = { name: "", email: "", password: "" };
+  const INITIAL_STATE2 = {
+    email: { name: "email", value: "" },
+    password: {
+      name: "password",
+      value: "",
+      validation: {
+        required: "Please enter a pasword!!!!",
+        minLength: [2, "MIN LENGTH OF 2!"],
+      },
+    },
+  };
+
   const [firebaseError, setFirebaseError] = React.useState(null);
 
   const authenticateUser = async () => {
@@ -47,16 +58,18 @@ function Login(props) {
     values,
     errors,
     isSubmitting,
-  } = useFormValidation(INITIAL_STATE, validateLogin, authenticateUser);
+  } = useFormValidation2(INITIAL_STATE2, authenticateUser);
 
   return (
-    <form onSubmit={handleSubmit} noValidate className="flex-column ">
+    <form onSubmit={handleSubmit} className="flex-column ">
       <p className="mb-7 size-5">{login ? "Login" : "Register"}</p>
       {!login && (
         <input
           name="name"
-          onBlur={handleBlur}
           value={values.name}
+          // name={values.name.name}
+          // value={values.name.value}
+          onBlur={handleBlur}
           onChange={handleChange}
           type="text"
           className={classnames(errors.name && "borderTertiary", "input")}
@@ -69,10 +82,12 @@ function Login(props) {
 
       <input
         name="email"
+        value={values.email}
+        // name={values.email.name}
+        // value={values.email.value}
         type="email"
         onBlur={handleBlur}
         autoComplete="off"
-        value={values.email}
         onChange={handleChange}
         className={classnames(errors.email && "borderTertiary", "input")}
         placeholder="Email"
@@ -81,8 +96,10 @@ function Login(props) {
 
       <input
         name="password"
-        onBlur={handleBlur}
         value={values.password}
+        // name={values.password.name}
+        // value={values.password.value}
+        onBlur={handleBlur}
         onChange={handleChange}
         autoComplete="off"
         type="password"
