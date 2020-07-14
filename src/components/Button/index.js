@@ -16,7 +16,7 @@ function Button(props) {
       disabled={props.disabled}
       className={classnames(
         styles.button,
-        props.className,
+        props.styles,
         hasPadding && styles.padding,
         props.primary && styles.primary,
         props.secondary && styles.secondary,
@@ -25,7 +25,12 @@ function Button(props) {
         props.size && styles[props.size]
       )}
     >
+      {props.icon && <i className={props.icon} />}
       {props.label}
+
+      {props.iconRight && (
+        <i className={classnames(props.label && "ml-3", props.iconRight)} />
+      )}
     </button>
   );
 }

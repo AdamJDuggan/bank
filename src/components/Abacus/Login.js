@@ -6,7 +6,7 @@ import AuthStore from "../../store/AuthStore";
 import { useDispatch } from "react-redux";
 
 //Hooks
-import useFormValidation2 from "../../hooks/useFormValidation2";
+import useForm from "../../hooks/useForm";
 
 //3rd Party
 import classnames from "classnames";
@@ -15,7 +15,7 @@ import classnames from "classnames";
 import { Button } from "../Button";
 
 /** Component describtion */
-// TODO: Turn of html inout noValidation
+// TODO: Turn of html input noValidation
 // TODO: rename to on from handle
 // Have fileds object which you pass validation rules which get mapped through
 // Config in - Fields out
@@ -26,15 +26,28 @@ function Login(props) {
   //Toggle whether to show login or register functionality
   const [login, toggleLogin] = React.useState(true);
   //Set initial state for this form
-  //const INITIAL_STATE = { name: "", email: "", password: "" };
-  const INITIAL_STATE2 = {
+  const registerConfig = {
+    name: { name: "name", validation: { required: true } },
     email: { name: "email", value: "" },
     password: {
       name: "password",
       value: "",
       validation: {
-        required: "Please enter a pasword!!!!",
-        minLength: [2, "MIN LENGTH OF 2!"],
+        required: "Please enter a pasword!",
+        minLength: [2],
+        maxLength: [6, "Password must be no more than six characters"],
+      },
+    },
+  };
+  const loginConfig = {
+    email: { name: "email", value: "" },
+    password: {
+      name: "password",
+      value: "",
+      validation: {
+        required: "Please enter a pasword",
+        minLength: [2],
+        maxLength: [6, "Password must be no more than six characters"],
       },
     },
   };
@@ -58,7 +71,7 @@ function Login(props) {
     values,
     errors,
     isSubmitting,
-  } = useFormValidation2(INITIAL_STATE2, authenticateUser);
+  } = useForm(login ? loginConfig : registerConfig, authenticateUser);
 
   return (
     <form onSubmit={handleSubmit} className="flex-column ">
@@ -67,8 +80,6 @@ function Login(props) {
         <input
           name="name"
           value={values.name}
-          // name={values.name.name}
-          // value={values.name.value}
           onBlur={handleBlur}
           onChange={handleChange}
           type="text"
@@ -83,8 +94,6 @@ function Login(props) {
       <input
         name="email"
         value={values.email}
-        // name={values.email.name}
-        // value={values.email.value}
         type="email"
         onBlur={handleBlur}
         autoComplete="off"
@@ -97,8 +106,6 @@ function Login(props) {
       <input
         name="password"
         value={values.password}
-        // name={values.password.name}
-        // value={values.password.value}
         onBlur={handleBlur}
         onChange={handleChange}
         autoComplete="off"

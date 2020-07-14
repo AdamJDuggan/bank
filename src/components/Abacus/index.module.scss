@@ -14,3 +14,15 @@
 .numberInput {
   width: 70px;
 }
+
+.forms {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 20px;
+}
+
+@media (min-width: 769px) {
+  .forms {
+    grid-template-columns: 1fr 1fr;
+  }
+}

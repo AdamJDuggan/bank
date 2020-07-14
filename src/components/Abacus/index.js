@@ -3,6 +3,8 @@ import React, { useEffect } from "react";
 
 //Redux
 import AuthStore from "../../store/AuthStore";
+import BudgetStore from "../../store/BudgetStore";
+
 import { useDispatch, useSelector } from "react-redux";
 
 //3rd Party
@@ -11,15 +13,19 @@ import classnames from "classnames";
 //Components
 import { Button } from "../Button";
 import { Login } from "./Login";
-import { Budget } from "./Budget";
+import { CreateBudget } from "./CreateBudget";
 
 /** Component */
 function Abacus(props) {
-  const { name, isLoggedIn } = useSelector((state) => state.auth);
+  const { id, name, isLoggedIn } = useSelector((state) => state.auth);
+  const budget = useSelector((state) => state.budget);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(AuthStore.watch());
+    dispatch(BudgetStore.get(id));
   }, [dispatch]);
+
+  const createBudget = (budget) => dispatch(BudgetStore.create(budget));
 
   return (
     <main className="p-4">
@@ -38,7 +44,22 @@ function Abacus(props) {
       </div>
 
       <div className="center">
-        {isLoggedIn ? <Budget name={name} /> : <Login />}
+        {isLoggedIn ? (
+          <>
+            {!budget ? (
+              <p>YES</p>
+            ) : (
+              <CreateBudget
+                budget={budget}
+                createBudget={createBudget}
+                id={id}
+                name={name}
+              />
+            )}
+          </>
+        ) : (
+          <Login />
+        )}
       </div>
     </main>
   );

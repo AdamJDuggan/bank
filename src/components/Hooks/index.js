@@ -16,7 +16,7 @@ import classnames from "classnames";
 import { Button } from "../Button";
 
 //Hooks
-import { useForm } from "../../hooks/useForm";
+import { useFormTest } from "../../hooks/useFormTest";
 import { useCountRenders } from "../../hooks/useCountRenders";
 
 //Styles
@@ -105,7 +105,7 @@ const todoReducer = (state, action) => {
 function Hooks(props) {
   //Use state
   const [count, setCount] = useState(() => expensiveInitialState());
-  const [values, handleChange] = useForm({ email: "", password: "" });
+  const [values, handleChange] = useFormTest({ email: "", password: "" });
 
   //Use Effect
   useEffect(() => {

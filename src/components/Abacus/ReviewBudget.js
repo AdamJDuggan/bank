@@ -4,16 +4,20 @@ import React from "react";
 // 3rd Party
 import classnames from "classnames";
 
+//Components
+import { Button } from "../Button";
+
 // Styles
 import styles from "./index.module.scss";
 
 /** Component describtion */
-function Budget(props) {
+function CreateBudget(props) {
   const dummyData = {
     income: 100,
     expenditure: 70,
     difference: 100 - 70,
   };
+
   const [header, setHeader] = React.useState("Monthly");
   const { income, expenditure, difference } = dummyData;
   return (
@@ -135,18 +139,28 @@ function Budget(props) {
           </div>
         </div>
       </div>
-      <div>
-        <div className=" card alignStart">
-          <p className="size-3 mb-4">Earn</p>
+      <div className={styles.forms}>
+        <div className={classnames(styles.formCard, "card alignStart")}>
+          <p className="size-4 mb-4">Earn</p>
           <div className="row mb-2">
             <input className="input mr-2" />
             <input
-              className={classnames(styles.numberInput, "input mr-2")}
+              className={classnames(styles.numberInput, "input mr-3")}
               type="number"
             />
-            <p className="textTertiary size-3 bold pointerCursor">x</p>
+            <Button icon="fas fa-times textTertiary size-3 pointerCursor" />
           </div>
 
+          <br />
+          <Button
+            primary
+            label="Add row"
+            iconRight="fas fa-plus pointerCursor"
+          />
+          <br />
+          <br />
+          <Button tertiary label="Save" />
+          <br />
           <br />
           <hr />
           <p className="bold">Total : £100</p>
@@ -156,4 +170,4 @@ function Budget(props) {
   );
 }
 
-export { Budget };
+export { CreateBudget };
