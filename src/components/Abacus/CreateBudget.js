@@ -18,7 +18,15 @@ function CreateBudget(props) {
     expenditure: props.budget.expenditure || [{ id: 1, name: "", value: null }],
   });
 
-  React.useEffect(() => {}, [props.budget]);
+  React.useEffect(() => {
+    // React.useState({
+    //   uid: props.id,
+    //   income: props.budget.income || [{ id: 1, name: "", value: null }],
+    //   expenditure: props.budget.expenditure || [
+    //     { id: 1, name: "", value: null },
+    //   ],
+    // });
+  }, [props.budget]);
 
   const addRow = (type) => {
     if (type === "income") {
@@ -58,16 +66,16 @@ function CreateBudget(props) {
 
   const updateIncomeRow = (id, name, value) => {
     const index = budget.income.findIndex((source) => source.id === id);
-    const updatedBudget = { ...budget };
-    updatedBudget.income[index] = { id, name, value };
-    setBudget(updatedBudget);
-    console.log(budget);
+    const updatedBudget = [...budget.income];
+    updatedBudget[index] = { id, name, value };
+    setBudget((prev) => ({ ...prev, income: updatedBudget }));
   };
 
   const updateExpenditureRow = (id, name, value) => {
-    const newRow = budget.expenditure.find((i) => i.id === id);
-    newRow.name = name;
-    newRow.value = value;
+    const index = budget.expenditure.findIndex((source) => source.id === id);
+    const updatedBudget = [...budget.expenditure];
+    updatedBudget[index] = { id, name, value };
+    setBudget((prev) => ({ ...prev, expenditure: updatedBudget }));
   };
 
   const createBudget = () => props.createBudget(budget);
