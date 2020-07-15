@@ -11,8 +11,12 @@
   margin: 10px;
 }
 
+.textInput {
+  width: 110px;
+}
+
 .numberInput {
-  width: 70px;
+  width: 50px;
 }
 
 .forms {
@@ -25,4 +29,7 @@
   .forms {
     grid-template-columns: 1fr 1fr;
   }
+}
+
+.formCard {
 }

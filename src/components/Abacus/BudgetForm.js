@@ -11,21 +11,25 @@ import { Button } from "../Button";
 import styles from "./index.module.scss";
 
 /** Component describtion */
-function CreateBudget(props) {
+function BudgetForm(props) {
   const [budget, setBudget] = React.useState({
     uid: props.id,
     income: props.budget.income || [{ id: 1, name: "", value: null }],
     expenditure: props.budget.expenditure || [{ id: 1, name: "", value: null }],
   });
 
+  const updateBudget = () => {
+    setBudget({
+      uid: props.id,
+      income: props.budget.income || [{ id: 1, name: "", value: null }],
+      expenditure: props.budget.expenditure || [
+        { id: 1, name: "", value: null },
+      ],
+    });
+  };
+
   React.useEffect(() => {
-    // React.useState({
-    //   uid: props.id,
-    //   income: props.budget.income || [{ id: 1, name: "", value: null }],
-    //   expenditure: props.budget.expenditure || [
-    //     { id: 1, name: "", value: null },
-    //   ],
-    // });
+    updateBudget();
   }, [props.budget]);
 
   const addRow = (type) => {
@@ -78,12 +82,33 @@ function CreateBudget(props) {
     setBudget((prev) => ({ ...prev, expenditure: updatedBudget }));
   };
 
-  const createBudget = () => props.createBudget(budget);
+  const rowSum = (type) => {
+    let sources = [];
+    if (type === "income")
+      budget.income.map((source) => {
+        if (source.value) sources.push(Number(source.value));
+      });
+    else if (type === "expenditure")
+      budget.expenditure.map((source) => {
+        if (source.value) sources.push(Number(source.value));
+      });
+    const sum = Math.round(sources.reduce((a, b) => a + b, 0));
+    return sum;
+  };
+  const expenditureSum = () => {
+    let sources = [];
+    budget.expenditure.map((source) => sources.push(parseInt(source.value)));
+    const sum = sources.reduce((a, b) => a + b, 0);
+    return sum;
+  };
+
+  const saveBudget = () => props.saveBudget(budget);
   return (
-    <div>
+    <div className="mv-4">
+      <h3>Budget Form</h3>
       <div className={styles.forms}>
         <div className={classnames(styles.formCard, "card alignStart")}>
-          <p className="size-4 mb-4">Income</p>
+          <p className="size-4 mb-4">Monthly Income</p>
           {budget.income.map((source, index) => (
             <div key={index} className="row mb-2">
               <input
@@ -91,11 +116,12 @@ function CreateBudget(props) {
                   updateIncomeRow(source.id, e.target.value, source.value)
                 }
                 defaultValue={source.name}
-                className="input mr-2"
+                className={classnames(styles.textInput, "input mr-2")}
               />
               <input
                 className={classnames(styles.numberInput, "input mr-3")}
                 type="number"
+                pattern="^\d*(\.\d{0,2})?$"
                 defaultValue={source.value}
                 onChange={(e) =>
                   updateIncomeRow(source.id, source.name, e.target.value)
@@ -120,11 +146,11 @@ function CreateBudget(props) {
           <br />
           <br />
           <hr />
-          <p className="bold">Total : £100</p>
+          <p className="bold">Total : £{rowSum("income")}</p>
         </div>
 
         <div className={classnames(styles.formCard, "card alignStart")}>
-          <p className="size-4 mb-4">Expenditure</p>
+          <p className="size-4 mb-4">Monthly Expenditure</p>
           {budget.expenditure.map((source, index) => (
             <div key={index} className="row mb-2">
               <input
@@ -132,11 +158,12 @@ function CreateBudget(props) {
                   updateExpenditureRow(source.id, e.target.value, source.value)
                 }
                 defaultValue={source.name}
-                className="input mr-2"
+                className={classnames(styles.textInput, "input mr-2")}
               />
               <input
                 className={classnames(styles.numberInput, "input mr-3")}
                 type="number"
+                pattern="^\d*(\.\d{0,2})?$"
                 defaultValue={source.value}
                 onChange={(e) =>
                   updateExpenditureRow(source.id, source.name, e.target.value)
@@ -161,19 +188,13 @@ function CreateBudget(props) {
           <br />
           <br />
           <hr />
-          <p className="bold">Total : £100</p>
+          <p className="bold">Total : £{rowSum("expenditure")}</p>
         </div>
       </div>
       <div className=" row center mt-10"></div>
-      <Button
-        // onClick={() => props.CreateBudget(budget)}
-        onClick={createBudget}
-        tertiary
-        size="large"
-        label="Save"
-      />
+      <Button onClick={saveBudget} tertiary size="large" label="Save" />
     </div>
   );
 }
 
-export { CreateBudget };
+export { BudgetForm };

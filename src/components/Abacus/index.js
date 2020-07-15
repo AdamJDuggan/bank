@@ -13,7 +13,9 @@ import classnames from "classnames";
 //Components
 import { Button } from "../Button";
 import { Login } from "./Login";
-import { CreateBudget } from "./CreateBudget";
+import { BudgetForm } from "./BudgetForm";
+import { Loading } from "../Loading";
+import { Header } from "./Header";
 
 /** Component */
 function Abacus(props) {
@@ -23,45 +25,50 @@ function Abacus(props) {
   useEffect(() => {
     dispatch(AuthStore.watch());
     dispatch(BudgetStore.get(id));
-  }, [dispatch]);
+  }, [id]);
 
-  const createBudget = (budget) => dispatch(BudgetStore.create(budget));
+  const getBudget = () => dispatch(BudgetStore.get(id));
+
+  const saveBudget = (budget) => dispatch(BudgetStore.save(budget));
 
   return (
-    <main className="p-4">
-      <div className="row">
-        <p className="size-5 bold">Abacus Express</p>
-        <div className="pull-right" />
+    <>
+      {/* <Loading /> */}
 
-        {isLoggedIn && (
-          <Button
-            styles={"has-text-primary"}
-            onClick={() => dispatch(AuthStore.logout())}
-            size="large"
-            label="Logout"
-          />
-        )}
-      </div>
+      <main className="p-4">
+        <div className="row">
+          <p className="size-5 bold">Abacus Express</p>
+          <div className="pull-right" />
+          {isLoggedIn && (
+            <Button
+              styles={"has-text-primary"}
+              onClick={() => dispatch(AuthStore.logout())}
+              size="large"
+              label="Logout"
+            />
+          )}
+        </div>
 
-      <div className="center">
-        {isLoggedIn ? (
-          <>
-            {!budget ? (
-              <p>YES</p>
-            ) : (
-              <CreateBudget
+        <div className="center">
+          {isLoggedIn ? (
+            <>
+              <hr />
+              <Header budget={budget} />
+              <hr />
+
+              <BudgetForm
                 budget={budget}
-                createBudget={createBudget}
+                saveBudget={saveBudget}
                 id={id}
                 name={name}
               />
-            )}
-          </>
-        ) : (
-          <Login />
-        )}
-      </div>
-    </main>
+            </>
+          ) : (
+            <Login />
+          )}
+        </div>
+      </main>
+    </>
   );
 }
 
