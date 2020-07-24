@@ -102,7 +102,14 @@ function BudgetForm(props) {
     return sum;
   };
 
-  const saveBudget = () => props.saveBudget(budget);
+  const [submitting, setSubmitting] = React.useState(false);
+  const saveBudget = () => {
+    setSubmitting(true);
+    setTimeout(props.saveBudget, 500, budget);
+    // await props.saveBudget(budget);
+    setSubmitting(false);
+  };
+
   return (
     <div className="mv-4">
       <h3>Budget Form</h3>
@@ -192,7 +199,14 @@ function BudgetForm(props) {
         </div>
       </div>
       <div className=" row center mt-10"></div>
-      <Button onClick={saveBudget} tertiary size="large" label="Save" />
+      {submitting && <p>Submitting</p>}
+      <Button
+        icon={submitting && "fas fa-spinner fa-spin"}
+        onClick={saveBudget}
+        tertiary
+        size="large"
+        label="Save"
+      />
     </div>
   );
 }

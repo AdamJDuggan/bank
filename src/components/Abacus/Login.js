@@ -1,25 +1,14 @@
 // React
 import React, { useEffect } from "react";
-
 //Redux
 import AuthStore from "../../store/AuthStore";
 import { useDispatch } from "react-redux";
-
 //Hooks
 import useForm from "../../hooks/useForm";
-
 //3rd Party
 import classnames from "classnames";
-
 //Components
 import { Button } from "../Button";
-
-/** Component describtion */
-// TODO: Turn of html input noValidation
-// TODO: rename to on from handle
-// Have fileds object which you pass validation rules which get mapped through
-// Config in - Fields out
-// Better to read off object name not hard tpe name="email" to get match
 
 function Login(props) {
   const dispatch = useDispatch();
@@ -71,10 +60,11 @@ function Login(props) {
     values,
     errors,
     isSubmitting,
+    formProps,
   } = useForm(login ? loginConfig : registerConfig, authenticateUser);
 
   return (
-    <form onSubmit={handleSubmit} className="flex-column ">
+    <form {...formProps} className="flex-column ">
       <p className="mb-7 size-5">{login ? "Login" : "Register"}</p>
       {!login && (
         <input

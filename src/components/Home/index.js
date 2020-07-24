@@ -6,7 +6,8 @@ import { Sport } from "../Sport";
 import { Elements } from "../Elements";
 import { Hooks } from "../Hooks";
 import { Abacus } from "../Abacus";
-import { EloquentJavascript } from "../EloquentJavascript";
+import { UseFormHook } from "../UseFormHook";
+import { ReactHookForm } from "../ReactHookForm";
 
 // Routes
 import routes from "../../routes/routes";
@@ -34,14 +35,19 @@ function Home(props) {
             <Hooks />
           </section>
         </Link>
-        <Link className="noDecoration" to={routes.ELEMENTS}>
+        <Link className="noDecoration" to={routes.FORM}>
           <section>
-            <EloquentJavascript />
+            <UseFormHook />
           </section>
         </Link>
         <Link className="noDecoration" to={routes.ELEMENTS}>
           <section>
             <Elements />
+          </section>
+        </Link>
+        <Link className="noDecoration" to={routes.REACT_HOOK_FORM}>
+          <section>
+            <ReactHookForm />
           </section>
         </Link>
       </div>

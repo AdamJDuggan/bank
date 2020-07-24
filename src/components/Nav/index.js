@@ -71,6 +71,12 @@ const MobileNav = (props) => {
             >
               Hooks
             </Link>
+            <Link
+              to={routes.FORM}
+              className={classnames(styles.menuItem, mobileLinkStyles)}
+            >
+              useForm
+            </Link>
           </div>
         </div>
       </nav>
@@ -120,7 +126,7 @@ function Nav(props) {
               Sport
             </Link>
             <Link
-              to={routes.ELEMENTS}
+              to={routes.ABACUS}
               className={classnames(styles.menuItem, desktopLinkStypes)}
             >
               Abacus
@@ -136,6 +142,12 @@ function Nav(props) {
               className={classnames(styles.menuItem, desktopLinkStypes)}
             >
               Hooks
+            </Link>
+            <Link
+              to={routes.FORM}
+              className={classnames(styles.menuItem, desktopLinkStypes)}
+            >
+              useForm
             </Link>
           </div>
         )}

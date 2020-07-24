@@ -14,7 +14,6 @@ import classnames from "classnames";
 import { Button } from "../Button";
 import { Login } from "./Login";
 import { BudgetForm } from "./BudgetForm";
-import { Loading } from "../Loading";
 import { Header } from "./Header";
 
 /** Component */
@@ -27,14 +26,10 @@ function Abacus(props) {
     dispatch(BudgetStore.get(id));
   }, [id]);
 
-  const getBudget = () => dispatch(BudgetStore.get(id));
-
   const saveBudget = (budget) => dispatch(BudgetStore.save(budget));
 
   return (
     <>
-      {/* <Loading /> */}
-
       <main className="p-4">
         <div className="row">
           <p className="size-5 bold">Abacus Express</p>

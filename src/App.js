@@ -9,6 +9,8 @@ import { Hooks } from "./components/Hooks";
 import { Sport } from "./components/Sport";
 import { Home } from "./components/Home";
 import { Abacus } from "./components/Abacus";
+import { UseFormHook } from "./components/UseFormHook";
+import { ReactHookForm } from "./components/ReactHookForm";
 
 // Routes
 import routes from "./routes/routes";
@@ -45,6 +47,12 @@ function App() {
             <Route exact path={routes.HOOKS} component={Hooks} />
             <Route exact path={routes.SPORT} component={Sport} />
             <Route exact path={routes.ABACUS} component={Abacus} />
+            <Route exact path={routes.FORM} component={UseFormHook} />
+            <Route
+              exact
+              path={routes.REACT_HOOK_FORM}
+              component={ReactHookForm}
+            />
           </Switch>
         </testContext.Provider>
       </BrowserRouter>

@@ -97,6 +97,13 @@ function useForm(config, authenticate) {
     console.log({ values });
   }
 
+  const formProps = {
+    noValidate: true,
+    onSubmit: (e) => {
+      handleSubmit(e);
+    },
+  };
+
   return {
     handleSubmit,
     handleBlur,
@@ -104,6 +111,7 @@ function useForm(config, authenticate) {
     values,
     errors,
     isSubmitting,
+    formProps,
   };
 }
 
